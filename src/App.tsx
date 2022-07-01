@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import BreweryList from './components/BreweryList/BreweryList';
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
         <p>Austin Texas Breweries</p>
       </header>
       <div className="App-body">
-        <p>Body</p>
+        <BreweryList />
       </div>
     </div>
   );
