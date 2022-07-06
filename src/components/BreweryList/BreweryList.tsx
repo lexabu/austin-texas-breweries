@@ -31,7 +31,6 @@ function BreweryList() {
   );
 
   if (data?.length) {
-    console.log(data);
     return (
       <div className="brewery-list">
         {data.map(
