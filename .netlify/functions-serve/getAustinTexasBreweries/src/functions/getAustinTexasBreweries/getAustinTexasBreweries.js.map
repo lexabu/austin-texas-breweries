@@ -1,8 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../../Users/alexabushanab/Code/austin-texas-breweries/functions/getAustinTexasBreweries/getAustinTexasBreweries.ts"],
-  "sourceRoot": "/var/folders/kv/ndj8sm2s2gs55bgwskp27txw0000gn/T/tmp-78235-lWGiZcX0w6gV",
-  "sourcesContent": ["import { Handler } from '@netlify/functions';\n\nexport const handler: Handler = async (event, context) => {\n  return {\n    statusCode: 200,\n    body: JSON.stringify({\n      message: `Hello, stranger!`,\n    }),\n  };\n};\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAEO,IAAM,UAAmB,OAAO,OAAO,YAAY;AACxD,SAAO;AAAA,IACL,YAAY;AAAA,IACZ,MAAM,KAAK,UAAU;AAAA,MACnB,SAAS;AAAA,IACX,CAAC;AAAA,EACH;AACF;",
-  "names": []
-}

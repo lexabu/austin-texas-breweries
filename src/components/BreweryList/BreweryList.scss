@@ -1,10 +1,6 @@
 @use 'src/colors.scss' as colors;
 
 .brewery-list {
-  border: 2px;
-  border-style: solid;
-  border-color: colors.$color3;
-  border-radius: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
