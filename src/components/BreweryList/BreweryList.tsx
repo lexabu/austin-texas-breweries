@@ -20,7 +20,7 @@ function formatAddress(street: string, city: string, state: string, postal_code:
 }
 
 function BreweryList() {
-  const { data, isFetching } = useQuery(
+  const { data } = useQuery(
     'getBreweries',
     () => {
       return getBreweries();
