@@ -90,15 +90,29 @@ function BreweryCard({ brewery }: Props) {
 
       <div className="brewery-card-row-2">
         <span className="address-pin icon">
-          <BsPinMap />
+          <a
+            href={`http://maps.google.com/maps?q=${name}+Austin,+TX">View map`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <BsPinMap />
+          </a>
         </span>
-        {address}
+        <a
+          href={`http://maps.google.com/maps?q=${name}+Austin,+TX">View map`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {address}
+        </a>
       </div>
 
       {phone && (
         <div className="brewery-card-row-3">
           <span className="phone icon">
-            <MdLocalPhone />
+            <a href={`tel:${formattedPhoneNumber}`}>
+              <MdLocalPhone />
+            </a>
           </span>
           <a href={`tel:${formattedPhoneNumber}`}>{formattedPhoneNumber}</a>
         </div>
@@ -109,7 +123,9 @@ function BreweryCard({ brewery }: Props) {
           {URL ? (
             <>
               <span className="open-in-new icon">
-                <MdOutlineOpenInNew />
+                <a href={URL} target="_blank" rel="noreferrer">
+                  <MdOutlineOpenInNew />
+                </a>
               </span>
               <a href={URL} target="_blank" rel="noreferrer">
                 {URL.replace(/(https?):\/\/(www.)?/, '')}
@@ -130,7 +146,7 @@ function BreweryCard({ brewery }: Props) {
               size="sm"
               className="collapse-text-button"
             >
-              <HiChevronDown className={!open ? 'restore-chevron' : 'invert-chevron'} />
+              <HiChevronDown className={!open ? 'restore-chevron' : 'invert-chevron'} size="20" />
             </Button>{' '}
           </div>
         )}

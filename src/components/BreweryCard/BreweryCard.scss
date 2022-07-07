@@ -12,11 +12,13 @@
   text-align: left;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
+
 @media only screen and (max-width: 1200px) {
   .brewery-card {
     width: 80%;
   }
 }
+
 .brewery-card-row-1 {
   display: flex;
   flex-direction: row;
@@ -51,7 +53,9 @@
 .collapse-text-body {
   height: 30vh;
   width: 100%;
+  padding: 20px;
 }
+
 .marker {
   height: 12px;
   width: 12px;
@@ -61,6 +65,7 @@
   color: colors.$color3;
   background-color: colors.$color1;
 }
+
 .marker-text {
   height: auto;
   width: 70px;
@@ -75,18 +80,33 @@
   margin-right: 10px;
 }
 
-.collapse-text-body {
-  padding: 20px;
+.collapse-text-button,
+.btn,
+.btn-primary,
+.btn-sm {
+  color: colors.$color7;
+  background-color: colors.$color5;
+  :hover,
+  :active {
+    color: colors.$color5;
+    fill: colors.$color4;
+  }
+}
+
+.invert-chevron,
+.restore-chevron {
+  transition-duration: 0.55s;
+  border-radius: 50%;
+  background: colors.$color5;
+  fill: colors.$color4;
 }
 
 .invert-chevron {
   transform: rotate(180deg);
-  transition-duration: 0.66s;
 }
 
 .restore-chevron {
   transform: rotate(0deg);
-  transition-duration: 0.66s;
 }
 
 a {
