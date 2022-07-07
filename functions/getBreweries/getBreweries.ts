@@ -1,7 +1,7 @@
 import { Handler } from '@netlify/functions';
 const axios = require('axios').default;
 
-export const handler: Handler = async (event, context) => {
+export const handler: Handler = async () => {
   try {
     const breweries = await axios.get(
       `https://api.openbrewerydb.org/breweries?per_page=50&by_city=austin&by_state=texas&sort=asc`,
