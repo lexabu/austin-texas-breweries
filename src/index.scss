@@ -1,5 +1,11 @@
+@use 'src/colors.scss' as colors;
+
 * {
   margin: 0;
+}
+
+html {
+  background-color: colors.$color1;
 }
 
 body {

@@ -3,6 +3,8 @@ import { useQuery } from 'react-query';
 
 import './BreweryList.scss';
 import BreweryCard from '../BreweryCard/BreweryCard';
+import Container from 'react-bootstrap/Container';
+
 const axios = require('axios').default;
 
 const getBreweries = async () => {

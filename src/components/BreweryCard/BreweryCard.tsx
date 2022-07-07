@@ -119,7 +119,7 @@ function BreweryCard({ brewery }: Props) {
               <span className="open-in-new icon">
                 <MdOutlineOpenInNew />
               </span>
-              <a href={URL} className="text-decoration-none">
+              <a href={URL} className="brewery-link">
                 {URL.replace(/(https?):\/\/(www.)?/, '')}
               </a>
             </>
@@ -138,7 +138,7 @@ function BreweryCard({ brewery }: Props) {
               size="sm"
               className="collapse-text-button"
             >
-              <HiChevronDown />
+              <HiChevronDown className={!open ? 'restore-chevron' : 'invert-chevron'} />
             </Button>{' '}
           </div>
         ) : (
