@@ -146,7 +146,7 @@ function BreweryCard({ brewery }: Props) {
               size="sm"
               className="collapse-text-button"
             >
-              <HiChevronDown className={!open ? 'restore-chevron' : 'invert-chevron'} />
+              <HiChevronDown className={!open ? 'restore-chevron' : 'invert-chevron'} size="20" />
             </Button>{' '}
           </div>
         )}

@@ -82,25 +82,29 @@
 .collapse-text-button,
 .btn,
 .btn-primary,
-.btn-sm,
-.restore-chevron,
-.invert-chevron {
-  color: colors.$color4;
-  background-color: colors.$color4;
-  border-color: colors.$color4;
+.btn-sm {
+  color: colors.$color7;
+  background-color: colors.$color5;
   fill: colors.$color5;
+  :hover,
+  :active {
+    color: colors.$color5;
+  }
+}
+
+.invert-chevron,
+.restore-chevron {
+  transition-duration: 0.55s;
+  border-radius: 50%;
+  background-color: colors.$color4;
 }
 
 .invert-chevron {
   transform: rotate(180deg);
-  transition-duration: 0.55s;
-  border-radius: 50%;
 }
 
 .restore-chevron {
   transform: rotate(0deg);
-  transition-duration: 0.55s;
-  border-radius: 50%;
 }
 
 a {
