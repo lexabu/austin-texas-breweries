@@ -1,4 +1,11 @@
 @use 'src/colors.scss' as colors;
+
+$primary: colors.$color5;
+$danger: #ad1a1a;
+$success: colors.$color7;
+$warning: orange;
+$info: colors.$color6;
+
 @import '~bootstrap/scss/bootstrap';
 
 .App {
