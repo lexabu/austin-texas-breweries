@@ -17,7 +17,10 @@ A single page react app that displays a list of breweries in Austin, Texas using
   </p>
 </div>
 
-![austin_texas_breweries](https://user-images.githubusercontent.com/38299309/177697654-06ebbcfd-d670-42ba-85ff-6efad927e862.gif)
+<div align="center">
+<img  src="https://user-images.githubusercontent.com/38299309/177697654-06ebbcfd-d670-42ba-85ff-6efad927e862.gif">
+</img>
+</div>
 
 #### Built With
 
