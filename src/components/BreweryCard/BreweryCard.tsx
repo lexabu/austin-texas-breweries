@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './BreweryCard.scss';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-import GoogleMapReact from 'google-map-react';
+import GoogleMapReact, { Coords } from 'google-map-react';
 import { BsPinMap } from 'react-icons/bs';
 import { MdOutlineOpenInNew, MdLocalPhone } from 'react-icons/md';
 import { HiChevronDown } from 'react-icons/hi';
+import { formatPhoneNumber } from '../../utilities';
 
 const key = process.env.REACT_APP_KEY || '';
 
@@ -15,10 +16,10 @@ type Props = {
     name: string;
     type: 'micro' | 'regional' | 'brewpub' | 'large' | 'planning' | 'contract' | 'proprietor' | 'closed';
     address: string;
-    URL: string;
-    lat: number;
-    lng: number;
-    phone: number;
+    URL: string | null;
+    lat: string | null;
+    lng: string | null;
+    phone: string | null;
   };
 };
 
@@ -52,29 +53,20 @@ const typeMap: BreweryType = {
   closed: ['info', 'A location which has been closed.'],
 };
 
-function formatPhoneNumber(phoneNumber: number) {
-  if (!phoneNumber) {
-    return null;
-  }
-  let formattedPhoneNumber = phoneNumber.toString();
-
-  if (formattedPhoneNumber[0] === '1') {
-    formattedPhoneNumber = formattedPhoneNumber.slice(1, formattedPhoneNumber.length - 1);
-  }
-  formattedPhoneNumber =
-    formattedPhoneNumber.slice(0, 3) +
-    '-' +
-    formattedPhoneNumber.slice(3, 6) +
-    '-' +
-    formattedPhoneNumber.slice(6);
-
-  return formattedPhoneNumber;
-}
-
 function BreweryCard({ brewery }: Props) {
   const { name, type, address, URL, lat, lng, phone } = brewery;
   const [open, setOpen] = useState(false);
   const bg = typeMap[type][0];
+  const formattedPhoneNumber = useMemo(() => formatPhoneNumber(phone), [phone]);
+
+  const coords = useMemo(() => {
+    if (lat && lng) {
+      return {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+      };
+    }
+  }, [lat, lng]);
 
   const Marker = ({ text, lat, lng }: { text: string; lat: number; lng: number }) => (
     <div className="marker-and-text">
@@ -82,15 +74,15 @@ function BreweryCard({ brewery }: Props) {
     </div>
   );
   const center = {
-    lat: lat,
-    lng: lng,
+    lat: coords?.lat,
+    lng: coords?.lng,
   };
   const zoom = 11;
 
   return (
     <div className="brewery-card">
       <div className="brewery-card-row-1">
-        {name}
+        <h4>{name}</h4>
         <Badge pill bg={bg}>
           {type}
         </Badge>
@@ -108,7 +100,7 @@ function BreweryCard({ brewery }: Props) {
           <span className="phone icon">
             <MdLocalPhone />
           </span>
-          {formatPhoneNumber(phone)}
+          <a href={`tel:${formattedPhoneNumber}`}>{formattedPhoneNumber}</a>
         </div>
       )}
 
@@ -119,7 +111,7 @@ function BreweryCard({ brewery }: Props) {
               <span className="open-in-new icon">
                 <MdOutlineOpenInNew />
               </span>
-              <a href={URL} className="brewery-link">
+              <a href={URL} target="_blank" rel="noreferrer">
                 {URL.replace(/(https?):\/\/(www.)?/, '')}
               </a>
             </>
@@ -128,7 +120,7 @@ function BreweryCard({ brewery }: Props) {
           )}
         </div>
 
-        {lng ? (
+        {coords && (
           <div className="brewery-card-row-4-right">
             <Button
               onClick={() => setOpen(!open)}
@@ -141,17 +133,22 @@ function BreweryCard({ brewery }: Props) {
               <HiChevronDown className={!open ? 'restore-chevron' : 'invert-chevron'} />
             </Button>{' '}
           </div>
-        ) : (
-          <></>
         )}
       </div>
-      <Collapse in={open}>
-        <div className="collapse-text-body">
-          <GoogleMapReact bootstrapURLKeys={{ key: key }} defaultCenter={center} defaultZoom={zoom}>
-            <Marker lat={lat} lng={lng} text={name} />
-          </GoogleMapReact>
-        </div>
-      </Collapse>
+
+      {coords && (
+        <Collapse in={open}>
+          <div className="collapse-text-body">
+            <GoogleMapReact
+              bootstrapURLKeys={{ key: key }}
+              defaultCenter={center as Coords}
+              defaultZoom={zoom}
+            >
+              <Marker lat={coords.lat} lng={coords.lng} text={name} />
+            </GoogleMapReact>
+          </div>
+        </Collapse>
+      )}
     </div>
   );
 }

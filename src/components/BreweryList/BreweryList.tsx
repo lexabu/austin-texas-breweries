@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 import './BreweryList.scss';
 import BreweryCard from '../BreweryCard/BreweryCard';
-import Container from 'react-bootstrap/Container';
+import { formatAddress } from '../../utilities';
 
 const axios = require('axios').default;
 
@@ -11,15 +11,6 @@ const getBreweries = async () => {
   const { data } = await axios.get(`/api/getBreweries`);
   return data;
 };
-
-function formatAddress(street: string, city: string, state: string, postal_code: string) {
-  postal_code = postal_code.slice(0, 5);
-  if (street === null) {
-    return `${city}, ${state}, ${postal_code}`;
-  } else {
-    return `${street}, ${city}, ${state}, ${postal_code}`;
-  }
-}
 
 function BreweryList() {
   const { data } = useQuery(
@@ -48,14 +39,14 @@ function BreweryList() {
                 | 'contract'
                 | 'proprietor'
                 | 'closed';
-              street: string;
+              street: string | null;
               city: string;
               state: string;
               postal_code: string;
-              website_url: string;
-              latitude: string;
-              longitude: string;
-              phone: number;
+              website_url: string | null;
+              latitude: string | null;
+              longitude: string | null;
+              phone: string | null;
             },
             index: number,
           ) => {
@@ -69,8 +60,8 @@ function BreweryList() {
                 breweryInfo.postal_code,
               ),
               URL: breweryInfo.website_url,
-              lat: parseFloat(breweryInfo.latitude) || 0,
-              lng: parseFloat(breweryInfo.longitude) || 0,
+              lat: breweryInfo.latitude,
+              lng: breweryInfo.longitude,
               phone: breweryInfo.phone,
             };
             return <BreweryCard brewery={brewery} key={index + 1000} />;
